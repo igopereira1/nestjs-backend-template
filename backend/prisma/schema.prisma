@@ -26,7 +26,7 @@ enum UserStatus {
 model User {
     id                         String     @id @default(uuid())
     name                       String
-    email                      String
+    email                      String     @unique
     password                   String
     status                     UserStatus @default(REGISTERED)
     fileKey                    String?    @map("file_key")

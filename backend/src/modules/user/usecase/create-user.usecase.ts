@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { InputCreateUserDto } from '../dto/input-create-user.dto';
 import { UseCase } from './base-usecase';
@@ -18,6 +18,11 @@ export class CreateUserUseCase extends UseCase {
   async execute(data: InputCreateUserDto): Promise<User> {
     const { file, ...rest } = data;
     const dto: CreateUserDto = { ...rest };
+
+    const userExists = await this.userRepository.getByEmail(dto.email);
+    if (userExists) {
+      throw new ConflictException('Email already exists');
+    }
 
     if (file) {
       const dataFile = await this.uploadService.uploadOneFile();
