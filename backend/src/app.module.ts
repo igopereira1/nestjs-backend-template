@@ -5,6 +5,7 @@ import { CryptoModule } from './modules/crypto/crypto.module';
 import { TemplateModule } from './modules/template/template.module';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UploadModule } from './modules/upload/upload.module';
     TemplateModule,
     MailerModule,
     UploadModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
