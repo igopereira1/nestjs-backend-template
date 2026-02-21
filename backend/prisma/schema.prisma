@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminPermissions {
+  DASHBOARD
+  SETTINGS
+  USERS
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  CONFIRMED
+  REGISTERED
+  INACTIVE
+}
+
+model AdminPermission {
+  id    String           @id @default(uuid())
+  key   AdminPermissions @unique
+  label String
+
+  users User[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admin_permissions")
+}
+
+model User {
+  id                         String     @id @default(uuid())
+  confirmationCode           String?    @map("confirmation_code")
+  confirmationCodeExpiration DateTime?  @map("confirmation_code_expiration")
+  email                      String     @unique
+  fileKey                    String?    @map("file_key")
+  fileUrl                    String?    @map("file_url")
+  forgotCode                 String?    @map("forgot_code")
+  forgotCodeExpiration       DateTime?  @map("forgot_code_expiration")
+  name                       String
+  password                   String
+  role                       Role       @default(USER)
+  status                     UserStatus @default(REGISTERED)
+
+  adminPermissions AdminPermission[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
