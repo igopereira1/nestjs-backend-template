@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { CryptoModule } from './modules/crypto/crypto.module';
+import { TemplateModule } from './modules/template/template.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CryptoModule } from './modules/crypto/crypto.module';
     }),
     PrismaModule,
     CryptoModule,
+    TemplateModule,
   ],
   controllers: [],
   providers: [],
