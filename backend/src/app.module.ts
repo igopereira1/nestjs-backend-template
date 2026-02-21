@@ -4,6 +4,7 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { CryptoModule } from './modules/crypto/crypto.module';
 import { TemplateModule } from './modules/template/template.module';
 import { MailerModule } from './modules/mailer/mailer.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { MailerModule } from './modules/mailer/mailer.module';
     CryptoModule,
     TemplateModule,
     MailerModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [],
