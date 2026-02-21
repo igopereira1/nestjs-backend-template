@@ -22,6 +22,7 @@ import { ToggleUserStatusUseCase } from './usecase/toggle-user-status.usecase.ab
 import { FindUserByIdUseCase } from './usecase/find-user-by-id.usecase.abstract';
 import { QueryDto } from '../shared/dto/query.dto';
 import { ResponseFindAllDto } from '../shared/dto/response-find-all.dto';
+import { UserResponseDto } from '../shared/dto/user-response.dto';
 
 @ApiTags('Admin Users')
 @Controller('admin-users')
@@ -62,7 +63,7 @@ export class AdminUsersController {
   async findById(
     @CurrentUser() user: User,
     @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  ): Promise<UserResponseDto> {
     handleAccessControl.verifyAdminRole(user);
     handleAccessControl.verifyPermission(user, 'USERS');
 
@@ -80,7 +81,7 @@ export class AdminUsersController {
   async toggleStatus(
     @CurrentUser() user: User,
     @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  ): Promise<UserResponseDto> {
     handleAccessControl.verifyAdminRole(user);
     handleAccessControl.verifyPermission(user, 'USERS');
 

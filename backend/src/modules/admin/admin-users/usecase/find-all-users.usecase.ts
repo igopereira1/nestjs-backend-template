@@ -6,6 +6,7 @@ import { QueryDto } from '../../shared/dto/query.dto';
 import { ResponseFindAllDto } from '../../shared/dto/response-find-all.dto';
 import { AdminRepository } from '../../shared/repository/admin.repository.abstract';
 import { FindAllUsersUseCase } from './find-all-users.usecase.abstract';
+import { UserWithPermissions } from '../../shared/repository/admin.repository.abstract';
 
 @Injectable()
 export class DefaultFindAllUsersUseCase extends FindAllUsersUseCase {
@@ -21,7 +22,7 @@ export class DefaultFindAllUsersUseCase extends FindAllUsersUseCase {
     return new PageDto(data, pageUsers.meta);
   }
 
-  private mapToResponse(user: any): UserResponseDto {
+  private mapToResponse(user: UserWithPermissions): UserResponseDto {
     return {
       id: user.id,
       name: user.name,

@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserResponseDto } from '../../shared/dto/user-response.dto';
 import { AdminRepository } from '../../shared/repository/admin.repository.abstract';
+import { UserWithPermissions } from '../../shared/repository/admin.repository.abstract';
 import { FindAdminByIdUseCase } from './find-admin-by-id.usecase.abstract';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class DefaultFindAdminByIdUseCase extends FindAdminByIdUseCase {
     return this.mapToResponse(user);
   }
 
-  private mapToResponse(user: any): UserResponseDto {
+  private mapToResponse(user: UserWithPermissions): UserResponseDto {
     return {
       id: user.id,
       name: user.name,

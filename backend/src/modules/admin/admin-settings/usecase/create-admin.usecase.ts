@@ -4,6 +4,7 @@ import { UserResponseDto } from '../../shared/dto/user-response.dto';
 import { CreateAdminDto } from '../dto/create-admin.dto';
 import { InputCreateAdminDto } from '../dto/input-create-admin.dto';
 import { AdminRepository } from '../../shared/repository/admin.repository.abstract';
+import { UserWithPermissions } from '../../shared/repository/admin.repository.abstract';
 import { CreateAdminUseCase } from './create-admin.usecase.abstract';
 
 @Injectable()
@@ -35,7 +36,7 @@ export class DefaultCreateAdminUseCase extends CreateAdminUseCase {
     return this.mapToResponse(newAdmin);
   }
 
-  private mapToResponse(user: any): UserResponseDto {
+  private mapToResponse(user: UserWithPermissions): UserResponseDto {
     return {
       id: user.id,
       name: user.name,

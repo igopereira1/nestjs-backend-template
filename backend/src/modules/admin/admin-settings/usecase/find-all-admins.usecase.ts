@@ -5,6 +5,7 @@ import { UserResponseDto } from '../../shared/dto/user-response.dto';
 import { QueryDto } from '../../shared/dto/query.dto';
 import { ResponseFindAllDto } from '../../shared/dto/response-find-all.dto';
 import { AdminRepository } from '../../shared/repository/admin.repository.abstract';
+import { UserWithPermissions } from '../../shared/repository/admin.repository.abstract';
 import { FindAllAdminsUseCase } from './find-all-admins.usecase.abstract';
 
 @Injectable()
@@ -21,7 +22,7 @@ export class DefaultFindAllAdminsUseCase extends FindAllAdminsUseCase {
     return new PageDto(data, pageUsers.meta);
   }
 
-  private mapToResponse(user: any): UserResponseDto {
+  private mapToResponse(user: UserWithPermissions): UserResponseDto {
     return {
       id: user.id,
       name: user.name,
