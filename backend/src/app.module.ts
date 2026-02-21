@@ -6,6 +6,7 @@ import { TemplateModule } from './modules/template/template.module';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { UserModule } from './modules/user/user.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './modules/user/user.module';
     MailerModule,
     UploadModule,
     UserModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],
